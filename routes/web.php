@@ -16,3 +16,9 @@
 $router->get('/', function () use ($router) {
     return "Cart Service";
 });
+$router->get('/cart', 'CartController@index');
+$router->post('/cart', 'CartController@create');
+$router->get('/cart/{cartId}/products', 'CartProductController@index');
+$router->post('/cart/{cartId}/products/{productId}', 'CartProductController@create');
+$router->delete('/cart/{cartId}/products/{productId}', 'CartProductController@destroy');
+$router->put('/cart/{cartId}/products/{productId}/quantity', 'CartProductController@update');
