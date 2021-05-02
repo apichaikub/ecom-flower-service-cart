@@ -25,6 +25,14 @@ class CartController extends Controller
     {
         // TODO: get client ip address
         $clientIpAddress = '199.9.9.9';
+        $carts = Cart::where('ip', $clientIpAddress)
+            ->where('deleted_at', null)
+            ->count();
+        $isCartExist = $carts > 0;
+        if($carts > 0) {
+            return response('cart already created', 400);
+        }
+
         $cartId = Str::uuid()->toString();
         $cart = Cart::create([
             'cart_id' => $cartId,
